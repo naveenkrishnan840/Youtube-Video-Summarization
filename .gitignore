@@ -1,0 +1,4 @@
+./frontend/package-lock.json
+./frontend/node_modules
+./backend/poetry.lock
+./backend/.env
