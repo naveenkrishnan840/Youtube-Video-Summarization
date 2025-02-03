@@ -16,6 +16,7 @@ torch.set_float32_matmul_precision("high")
 
 
 def download_video(url: str):
+    os.makedirs(os.getenv("VIDEO_PATH"),exist_ok=True)
     if os.path.exists(os.path.join(os.getenv("VIDEO_PATH"), "".join(os.listdir(os.getenv("VIDEO_PATH"))))):
         os.remove(os.path.join(os.getenv("VIDEO_PATH"), "".join(os.listdir(os.getenv("VIDEO_PATH")))))
     ydl_opts = {
@@ -31,6 +32,7 @@ def download_video(url: str):
 
 
 def video_to_images():
+    os.makedirs(os.getenv("DOCUMENTS_PATH"), exist_ok=True)
     exist_docs = Path(os.getenv("DOCUMENTS_PATH"))
     [file.unlink() for file in exist_docs.iterdir() if file.is_file()]
     video_clip = VideoFileClip(
@@ -40,6 +42,7 @@ def video_to_images():
 
 
 def video_to_audio():
+    os.makedirs(os.getenv("AUDIO_PATH"), exist_ok=True)
     if os.path.exists(os.path.join(os.getenv("AUDIO_PATH"), os.getenv("AUDIO_FORMAT"))):
         os.remove(os.path.join(os.getenv("AUDIO_PATH"), os.getenv("AUDIO_FORMAT")))
 
