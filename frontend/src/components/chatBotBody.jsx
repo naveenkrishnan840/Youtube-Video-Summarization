@@ -49,15 +49,14 @@ export default function ChatBotBody () {
 
     const updateHeight = () => {
         if (heightRef.current) {
-          const newHeight = heightRef.current.scrollHeight;
-          heightRef.current.style.height = `${newHeight}px`;
+            heightRef.current.scrollTop = heightRef.current.scrollHeight;
         }
-      };
-    
+    };
+
       // Recalculate the height whenever messages change
-      useEffect(() => {
+    useEffect(() => {
         updateHeight();
-      }, [messages]);
+    }, [messages]);
     const submitVideoId = () => {
         setIsLoading(true)
         const response = RequestUrlService("/videoUrlProcessing", {"url": url});
@@ -70,8 +69,11 @@ export default function ChatBotBody () {
                         title: "Bot",
                         text: "Hi, How can i help you! I can assist you!",
                         focus: true,
-                        className: "text-black max-h-screen",
-                        date: new Date()
+                        avatar: "https://t4.ftcdn.net/jpg/02/11/61/95/360_F_211619589_fnRk5LeZohVD1hWInMAQkWzAdyVlS5ox.jpg",
+                        className: "text-black max-h-screen font-semibold font-mono",
+                        date: new Date(),
+                        statusTitle: "Received",
+                        status: "received"
                     }])
                 setembedUrl(`https://www.youtube.com/embed/${url.split('?')[1]}`)
                 setVideoProcessed(true)
@@ -96,9 +98,11 @@ export default function ChatBotBody () {
                 type: "text",
                 title: "User",
                 text: values["query"],
-                // styles: {backgroundColor:"gray"},
-                className: "text-black max-h-screen",
-                date: new Date()
+                className: "text-black max-h-screen font-semibold font-mono",
+                date: new Date(),
+                status: "received",
+                statusTitle: "Received",
+                avatar: "https://t4.ftcdn.net/jpg/09/84/41/77/360_F_984417740_gYxjkB4WOCqAnZVvxLwVUPm7sEQK7hBQ.jpg"
             }]
         )
         try {
@@ -125,9 +129,11 @@ export default function ChatBotBody () {
                     type: "text",
                     title: "Bot",
                     text: streamingMessage,
-                    // styles: {backgroundColor:"gray"},
-                    className: "text-black",
-                    date: new Date()
+                    avatar: "https://t4.ftcdn.net/jpg/02/11/61/95/360_F_211619589_fnRk5LeZohVD1hWInMAQkWzAdyVlS5ox.jpg",
+                    className: "text-black max-h-screen font-semibold font-mono",
+                    date: new Date(),
+                    statusTitle: "Received",
+                    status: "received"
                 }]
             )
           }
@@ -137,8 +143,6 @@ export default function ChatBotBody () {
             type: 'error',
             content: 'Failed to connect to the server'
           }]);
-        } finally {
-          setIsLoading(false);
         }
       };
     return (
