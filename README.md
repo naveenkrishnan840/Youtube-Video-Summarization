@@ -47,6 +47,68 @@ The motivation behind this YouTube summarization project stems from the increasi
         - Role: The final objective of your project is to generate a summary of the YouTube video by combining both text and images in a meaningful way.
 
 ## Architecture
+   +-------------------+
+   |                   | 
+   |   YouTube Video   | 
+   |     (Input)       | 
+   |                   | 
+   +--------+----------+
+            |
+       (1) Download
+            |
+   +--------v----------+
+   |                   | 
+   |     yt-dlp        | 
+   |  (Video/Audio     |
+   |   Extraction)     |
+   +--------+----------+
+            |
+   +--------v----------+      +------------------------+
+   |                   |      |                        |   
+   |   Audio (MP3)     |      |   Video (MP4)          |
+   |                   |      |                        |
+   +--------+----------+      +------------------------+
+            |                           |
+      (2) Audio Transcription           (3) Frame Extraction
+            |                           |
+   +--------v----------+        +-------v-------+
+   |                   |        |               |
+   |   OpenAI Whisper  |        |    CLIP       |
+   |  (Speech-to-Text) |        | (Image Analysis)|
+   +--------+----------+        +-------+-------+
+            |                           |
+    (4) Text Data                    (5) Image Data
+            |                           |
+   +--------v----------+        +-------v-------+
+   |                   |        |               |
+   |  Text Data        |        |   Key Frames   |
+   | (Transcription)   |        |   (Images)     |
+   +--------+----------+        +-------+-------+
+            |                           |
+  (6) Indexing & Embeddings        (7) Vector Storage  
+            |                           |
+   +--------v----------+        +-------v-------+
+   |                   |        |               |
+   |  LlamaIndex       |        |  LanceDB       |
+   | (Text Indexing)   |        | (Vector DB)    |
+   +--------+----------+        +-------+-------+
+            |                           |
+   (8) Retrieval for Summarization (8) Retrieval for Summarization
+            |                           |
+    +-------v-------+            +------v-------+
+    |               |            |              |
+    |  Multimodal   |            |  Multimodal   |
+    |   Model       |            |    Model      |
+    | (Text + Images)|            |(Text + Images)|
+    +-------+-------+            +------^-------+
+            |                          |
+   (9) Final Summary Generation (9) Final Summary Generation 
+            |                          
+   +--------v----------+          
+   |                   |  
+   |   Summarized Text |   
+   |     & Images      |   
+   +-------------------+
 
 
 
