@@ -47,13 +47,7 @@ The motivation behind this YouTube summarization project stems from the increasi
         - Role: The final objective of your project is to generate a summary of the YouTube video by combining both text and images in a meaningful way.
 
 ## Architecture
-This will render a flowchart when viewed in a Markdown editor that supports Mermaid (like **VS Code** with the Mermaid plugin or GitHub).
 
-### Option 3: Using `plantUML`
-
-If you're familiar with **PlantUML**, it’s another tool you can integrate with Markdown to generate flowcharts. This also allows you to write UML diagrams using a simple text-based syntax.
-
-You can use PlantUML for generating a flowchart like this:
 ```mermaid
 graph TD
     A[YouTube Video (Input)] -->|1. Download| B(yt-dlp (Video/Audio Extraction));
