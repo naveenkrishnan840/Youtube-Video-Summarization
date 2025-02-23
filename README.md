@@ -50,18 +50,18 @@ The motivation behind this YouTube summarization project stems from the increasi
 
 ```mermaid
 graph TD
-    A["YouTube Video (Input)"] -->|1. Download| B["yt-dlp (Video/Audio Extraction)"];
+    A["YouTube Video (Input)"] --> B["yt-dlp (Video/Audio Extraction)"];
     B --> C["Audio (MP3)"];
     B --> D["Video (MP4)"];
-    C -->|2. Audio Transcription| E["OpenAI Whisper (Speech-to-Text)"];
-    D -->|3. Frame Extraction| F["CLIP (Image Analysis)"];
-    E -->|4. Text Data| G["Text Data (Transcription)"];
-    F -->|5. Image Data| H["Key Frames (Images)"];
-    G -->|6. Indexing & Embeddings| I["LlamaIndex (Text Indexing)"];
-    H -->|7. Vector Storage| J["LanceDB (Vector DB)"];
-    I -->|8. Retrieval for Summarization| K["Multimodal Model (Text + Images)"];
-    J -->|8. Retrieval for Summarization| K;
-    K -->|9. Final Summary Generation| L["Summarized Text & Images"];
+    C --> E["OpenAI Whisper (Speech-to-Text)"];
+    D --> F["CLIP (Image Analysis)"];
+    E --> G["Text Data (Transcription)"];
+    F --> H["Key Frames (Images)"];
+    G --> I["LlamaIndex (Text Indexing)"];
+    H --> J["LanceDB (Vector DB)"];
+    I --> K["Multimodal Model (Text + Images)"];
+    J --> K;
+    K --> L["Summarized Text & Images"];
 
 ```
 ## Project Structure
