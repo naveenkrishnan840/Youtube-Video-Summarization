@@ -54,7 +54,6 @@ This will render a flowchart when viewed in a Markdown editor that supports Merm
 If you're familiar with **PlantUML**, it’s another tool you can integrate with Markdown to generate flowcharts. This also allows you to write UML diagrams using a simple text-based syntax.
 
 You can use PlantUML for generating a flowchart like this:
-
 ```mermaid
 graph TD
     A[YouTube Video (Input)] -->|1. Download| B(yt-dlp (Video/Audio Extraction));
