@@ -50,31 +50,6 @@ The motivation behind this YouTube summarization project stems from the increasi
 
 ```mermaid
 graph TD
-    %% Define node styles
-    style A fill:#f9f,stroke:#333,stroke-width:2px
-    style B fill:#bbf,stroke:#333,stroke-width:2px
-    style C fill:#cfc,stroke:#333,stroke-width:2px
-    style D fill:#cfc,stroke:#333,stroke-width:2px
-    style E fill:#fbb,stroke:#333,stroke-width:2px
-    style F fill:#ffb,stroke:#333,stroke-width:2px
-    style G fill:#cfc,stroke:#333,stroke-width:2px
-    style H fill:#cfc,stroke:#333,stroke-width:2px
-    style I fill:#bfb,stroke:#333,stroke-width:2px
-    style J fill:#bfb,stroke:#333,stroke-width:2px
-    style K fill:#ff0,stroke:#333,stroke-width:2px
-    style L fill:#f9f,stroke:#333,stroke-width:2px
-    
-    %% Define edge styles
-    linkStyle 0 stroke:#ff6347,stroke-width:2px,stroke-dasharray: 5, 5
-    linkStyle 1 stroke:#32cd32,stroke-width:2px
-    linkStyle 2 stroke:#32cd32,stroke-width:2px
-    linkStyle 3 stroke:#ff6347,stroke-width:2px
-    linkStyle 4 stroke:#ff6347,stroke-width:2px
-    linkStyle 5 stroke:#ff6347,stroke-width:2px
-    linkStyle 6 stroke:#ff6347,stroke-width:2px
-    linkStyle 7 stroke:#ffff00,stroke-width:2px
-    linkStyle 8 stroke:#ffff00,stroke-width:2px
-
     %% Graph structure
     A["YouTube Video (Input)"] --> B["yt-dlp (Video/Audio Extraction)"];
     B --> C["Audio (MP3)"];
