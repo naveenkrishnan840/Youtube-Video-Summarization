@@ -31,20 +31,48 @@ The <b> Youtube Video Summarization </b> focuses on creating a multimodal summar
 # Motivation
 The motivation behind this YouTube summarization project stems from the increasing volume of video content available online and the growing demand for efficient ways to consume and understand this content. YouTube, as one of the largest video platforms, hosts vast amounts of information, but manually watching and absorbing every video is time-consuming.
 
-## key Features
+## key Features & Explanation
   1. Extracting Video from YouTube with yt-dlp:
+       - Package: ** yt-dlp **
        - Role: This tool is used to download YouTube videos. It can download both the video and audio tracks in various formats. This is the starting point of the project, where the system retrieves the raw video content from YouTube.
+       - Output: You get the video in formats such as MP4 or audio in formats like MP3.
 
   2. Extracting Audio and Transcribing Speech to Text using OpenAI Whisper:
+       - Package: ** OpenAI Whisper **
        - Role: Whisper is a speech-to-text model developed by OpenAI, capable of transcribing spoken language from audio to text. This step converts the audio from the 
-               YouTube video into text form, making the speech content accessible for further processing.
+               YouTube video into text form, making the speech content accessible for further processing.  
+       -  Use: After downloading a YouTube video using yt-dlp, Whisper is used to convert any spoken content in the video into text. This transcription is essential for creating the summary, as it allows the system to analyze the video's spoken content rather than relying on visuals alone.
+         
   3. Extracting Key Frames or Images from Video with CLIP:
+       - Package: ** CLIP (Contrastive Language-Image Pre-training) **
        - Role: CLIP is a model that links images and text. It can understand the content of images in the context of natural language descriptions. This capability makes it 
                useful for extracting relevant visual information from a video.
-  4. Storing and Indexing Data for Retrieval with LlamaIndex and LanceDB:
+	- Process:
+        	- From the downloaded video, you can extract key frames or still images that represent important visual scenes.Alternatively, CLIP can help you identify and 			analyze specific scenes or images within the video based on textual queries.
+	- Output: Key images or frames from the video, which could contain vital information related to the summary.
+
+  5. Storing and Indexing Data for Retrieval with LlamaIndex and LanceDB:
+        - Packages: ** LlamaIndex (for indexing), LanceDB (for vector database) **
         - Role: These tools help manage and organize the extracted data (text and images), enabling quick retrieval and efficient searching for the multimodal summary generation.
-  5. Multimodal Summary Generation:
+        - LlamaIndex:
+		- This tool helps to index the extracted text and images into a structured format, like a knowledge graph or indexed database. It makes the data easily searchable and accessible.
+		- Text data (from Whisper) is indexed by LlamaIndex for quick access.
+		- Image data (from CLIP) could be paired with descriptive text and indexed for efficient retrieval during summary generation.
+	- LanceDB:
+		- LanceDB is a vector database that helps store and search high-dimensional embeddings (numerical representations) of the data.
+		- After extracting both text and images, they are turned into embeddings (using models like CLIP for images and Whisper for text). These embeddings are 			stored in LanceDB, which allows fast retrieval based on similarity.
+	- Output: A structured, indexed database of video content, both in the form of transcriptions (text) and visual information (images).
+
+  7. Multimodal Summary Generation:
         - Role: The final objective of your project is to generate a summary of the YouTube video by combining both text and images in a meaningful way.
+        - Process:
+		- The text (transcribed by Whisper) provides the spoken content from the video.
+		- The images (extracted using CLIP) represent key visual elements.
+		- The multimodal model combines these two data sources (text and images) to produce a more accurate and comprehensive summary, potentially using a language 			model like Gemini model.
+	- How the Model Works:
+		- The model processes the transcribed text and visual data (stored as embeddings in LanceDB) to identify key points from both modalities.
+		- It can use the text to identify speech and the images to identify key visual elements, producing a summary that incorporates both.
+	- Output: A concise summary that includes both textual and visual cues from the video.
 
 ## Architecture
 
