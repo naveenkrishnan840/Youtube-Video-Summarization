@@ -51,17 +51,17 @@ The motivation behind this YouTube summarization project stems from the increasi
 ```mermaid
 graph TD
     %% Graph structure
-A["YouTube Video (Input)"] --> B["yt-dlp (Video/Audio Extraction)"];
-    B --> C["Audio (MP3)"];
-    B --> D["Video (MP4)"];
-    C --> E["OpenAI Whisper (Speech-to-Text)"];
-    D --> F["CLIP (Image Analysis)"];
-    E --> G["Text Data (Transcription)"];
-    F --> H["Key Frames (Images)"];
-    H --> J["LanceDB (Vector DB)"];
+	A["YouTube Video (Input)"] --> B["yt-dlp (Video/Audio Extraction)"];
+    	B --> C["Audio (MP3)"];
+    	B --> D["Video (MP4)"];
+    	C --> E["OpenAI Whisper (Speech-to-Text)"];
+    	D --> F["CLIP (Image Analysis)"];
+    	E --> G["Text Data (Transcription)"];
+    	F --> H["Key Frames (Images)"];
+    	H --> J["LanceDB (Image Vector + Text Vector)"];
 	G --> J;
-    J --> K["Multimodal Model (Text + Images)"];
-    K --> L["Summarized Text & Images"];
+    	J --> K["Multimodal Model (Text + Images)"];
+    	K --> L["Summarized Text & Images"];
 ```
 
 
