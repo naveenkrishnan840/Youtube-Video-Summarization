@@ -55,6 +55,7 @@ If you're familiar with **PlantUML**, it’s another tool you can integrate with
 
 You can use PlantUML for generating a flowchart like this:
 
+```mermaid
 graph TD
     A[YouTube Video (Input)] -->|1. Download| B(yt-dlp (Video/Audio Extraction));
     B --> C[Audio (MP3)];
@@ -68,9 +69,9 @@ graph TD
     I -->|8. Retrieval for Summarization| K[Multimodal Model (Text + Images)];
     J -->|8. Retrieval for Summarization| K;
     K -->|9. Final Summary Generation| L[Summarized Text & Images];
+```
+## Project Structure
 
-
-## Project Structure 
 ```
 amazone-sales-chat-bot/
 ├── backend/
