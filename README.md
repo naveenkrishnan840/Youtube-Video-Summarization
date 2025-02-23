@@ -63,34 +63,26 @@ graph TD
     I --> K["Multimodal Model (Text + Images)"];
     J --> K;
     K --> L["Summarized Text & Images"];
-
 ```
+
+
 ## Project Structure
-
 ```
-amazone-sales-chat-bot/
+Youtube-Video-Summarization/
 ├── backend/
 |  ├── src/
-|  |   ├── __init__.py
-|  │   ├── generate/                           
-|  │   │   ├── __init__.py                     
-|  │   │   ├── generate.py             
-|  |   |── grade_documents
-|  │   │   ├── __init__.py             
-|  │   │   ├── grade_documents.py  
-|  |   |── retrieve   
-|  │   │   ├── __init__.py         
-|  │   │   ├── retrieve.py         
-|  |   ├── search_tool             
-|  │   │   ├── __init__.py         
-|  |   |   ├── web_search_tool.py  
-|  |   |── transform_query
-|  |   |   |── __init__.py
-|  |   |   |── transform_query.py
-|  │   ├── build_graph.py          
-|  |   ├── esges.py
-|  |   ├── state_template.py       
-|  |   ├── structured_output.py 
+|  |   ├── audio_path/
+|  │   ├── documents/                           
+|  │   │   ├── image.png                     
+|  │   │   ├── audio_text.txt             
+|  |   |── lancedb/
+|  │   │   ├── image_collections.lance/
+|  │   │   ├── text_collections.lance/
+|  |   |── tokenizer_path/         
+|  |   ├── video_path/
+|  |   |── whisper_model_path/
+|  │   ├── request_validate.py          
+|  |   ├── video_extract.py
 |  │────── .env # If you want
 |  │────── pyproject.toml # create virtual env using poetry
 |  │────── main.py # Main entry point
@@ -146,16 +138,15 @@ amazone-sales-chat-bot/
 
 6. Set up environment variables in `.env`:
    ```bash
-    GOOGLE_API_KEY="Your api key"
-    TAVILY_API_KEY="Your api key"
-    OPEN_API_KEY= "Your api key"
-    OPENROUTER_BASE_URL="your url"
-    QDRANT_API_KEY="Your api key"
-    QDRANT_URL="your url"
-    LANGCHAIN_TRACING_V2=true
-    LANGCHAIN_ENDPOINT="https://api.smith.langchain.com"
-    LANGCHAIN_API_KEY="your api key"
-    LANGCHAIN_PROJECT="your project name"
+    DOCUMENTS_PATH="your docs path"
+    AUDIO_PATH="your audio path"
+    IMAGE_FORMAT=frame%04d.png
+    AUDIO_FORMAT=output_audio.mp3
+    VIDEO_PATH="your video path"
+    AUDIO_TEXT_FORMAT=audio_text.txt
+    OUTPUT_AUDIO_PATH=output_text.txt
+    GOOGLE_API_KEY="you api here"
+    LANCEDB_PATH="your DB path"
    ```
 
 7. Run the backend:
