@@ -55,29 +55,19 @@ If you're familiar with **PlantUML**, it’s another tool you can integrate with
 
 You can use PlantUML for generating a flowchart like this:
 
-```markdown
-```plantuml
-@startuml
-start
-:YouTube Video (Input);
-:yt-dlp (Video/Audio Extraction);
-if (Extract Audio or Video?) then (Audio)
-  :Audio (MP3);
-  :OpenAI Whisper (Speech-to-Text);
-  :Text Data (Transcription);
-else (Video)
-  :Video (MP4);
-  :CLIP (Image Analysis);
-  :Key Frames (Images);
-endif
-:LlamaIndex (Text Indexing);
-:LanceDB (Vector DB);
-:Multimodal Model (Text + Images);
-:Final Summary Generation;
-:Summarized Text & Images;
-stop
-@enduml
-
+graph TD
+    A[YouTube Video (Input)] -->|1. Download| B(yt-dlp (Video/Audio Extraction));
+    B --> C[Audio (MP3)];
+    B --> D[Video (MP4)];
+    C -->|2. Audio Transcription| E[OpenAI Whisper (Speech-to-Text)];
+    D -->|3. Frame Extraction| F[CLIP (Image Analysis)];
+    E -->|4. Text Data| G[Text Data (Transcription)];
+    F -->|5. Image Data| H[Key Frames (Images)];
+    G -->|6. Indexing & Embeddings| I[LlamaIndex (Text Indexing)];
+    H -->|7. Vector Storage| J[LanceDB (Vector DB)];
+    I -->|8. Retrieval for Summarization| K[Multimodal Model (Text + Images)];
+    J -->|8. Retrieval for Summarization| K;
+    K -->|9. Final Summary Generation| L[Summarized Text & Images];
 
 
 ## Project Structure 
