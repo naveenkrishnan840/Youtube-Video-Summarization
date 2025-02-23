@@ -47,14 +47,37 @@ The motivation behind this YouTube summarization project stems from the increasi
         - Role: The final objective of your project is to generate a summary of the YouTube video by combining both text and images in a meaningful way.
 
 ## Architecture
-   +-------------------+ | | | YouTube Video | | (Input) | | | +--------+----------+ | (1) Download | +--------v----------+ | | | yt-dlp | | (Video/Audio | | Extraction) | +--------+----------+ | +--------v----------+ +------------------------+ | | | |
-| Audio (MP3) | | Video (MP4) | | | | | +--------+----------+ +------------------------+ | | (2) Audio Transcription (3) Frame Extraction | | +--------v----------+ +-------v-------+ | | | | | OpenAI Whisper | | CLIP | | (Speech-to-Text) | | (Image Analysis)| +--------+----------+ +-------+-------+ | | (4) Text Data (5) Image Data | | +--------v----------+ +-------v-------+ | | | | | Text Data | | Key Frames | | (Transcription) | | (Images) | +--------+----------+ +-------+-------+ | | (6) Indexing & Embeddings (7) Vector Storage
-| | +--------v----------+ +-------v-------+ | | | | | LlamaIndex | | LanceDB | | (Text Indexing) | | (Vector DB) | +--------+----------+ +-------+-------+ | | (8) Retrieval for Summarization (8) Retrieval for Summarization | | +-------v-------+ +------v-------+ | | | | | Multimodal | | Multimodal | | Model | | Model | | (Text + Images)| |(Text + Images)| +-------+-------+ +------^-------+ | | (9) Final Summary Generation (9) Final Summary Generation |
-+--------v----------+
-| |
-| Summarized Text |
-| & Images |
-+-------------------+
+This will render a flowchart when viewed in a Markdown editor that supports Mermaid (like **VS Code** with the Mermaid plugin or GitHub).
+
+### Option 3: Using `plantUML`
+
+If you're familiar with **PlantUML**, it’s another tool you can integrate with Markdown to generate flowcharts. This also allows you to write UML diagrams using a simple text-based syntax.
+
+You can use PlantUML for generating a flowchart like this:
+
+```markdown
+```plantuml
+@startuml
+start
+:YouTube Video (Input);
+:yt-dlp (Video/Audio Extraction);
+if (Extract Audio or Video?) then (Audio)
+  :Audio (MP3);
+  :OpenAI Whisper (Speech-to-Text);
+  :Text Data (Transcription);
+else (Video)
+  :Video (MP4);
+  :CLIP (Image Analysis);
+  :Key Frames (Images);
+endif
+:LlamaIndex (Text Indexing);
+:LanceDB (Vector DB);
+:Multimodal Model (Text + Images);
+:Final Summary Generation;
+:Summarized Text & Images;
+stop
+@enduml
+
 
 
 ## Project Structure 
