@@ -58,7 +58,7 @@ graph TD
     D --> F["CLIP (Image Analysis)"];
     E --> G["Text Data (Transcription)"];
     F --> H["Key Frames (Images)"];
-    G --> I["LlamaIndex (Text Indexing)"];
+    G --> I["LanceDB (Text Indexing)"];
     H --> J["LanceDB (Vector DB)"];
     I --> K["Multimodal Model (Text + Images)"];
     J --> K;
