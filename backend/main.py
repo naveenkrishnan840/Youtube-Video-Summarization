@@ -14,8 +14,8 @@ from llama_index.embeddings.clip import ClipEmbedding
 from llama_index.core.prompts import ChatPromptTemplate
 from llama_index.core import Settings
 from llama_index.multi_modal_llms.gemini import GeminiMultiModal
-from backend.src.video_extract import *
-from backend.src.request_validate import BotRequestQuery, VideoUrlRequest
+from src.video_extract import *
+from src.request_validate import BotRequestQuery, VideoUrlRequest
 
 app = FastAPI()
 
