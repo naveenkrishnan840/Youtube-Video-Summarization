@@ -1,0 +1,16 @@
+llama-index
+llama-index-vector-stores-lanced
+llama-index-embeddings-clip
+fastapi
+uvicorn
+moviepy
+lanced
+yt-dlp
+transformers
+torch
+torchvision
+ffmpeg-python
+soundfile
+llama-index-llms-huggingface
+llama-index-llms-gemini
+llama-index-embeddings-gemini
