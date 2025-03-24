@@ -75,19 +75,19 @@ async def audio_to_text():
         device = "cuda:0" if torch.cuda.is_available() else "cpu"
         torch_dtype = torch.float16 if torch.cuda.is_available() else torch.float32
 
-        if os.path.exists("src/tokenizer_path") and os.path.exists("src/whisper_model_path"):
-            processor = AutoProcessor.from_pretrained(pretrained_model_name_or_path="src/tokenizer_path")
-            model = AutoModelForSpeechSeq2Seq.from_pretrained(
-                pretrained_model_name_or_path="src/whisper_model_path",
-                torch_dtype=torch_dtype,
-                use_safetensors=True)
-        else:
-            processor = AutoProcessor.from_pretrained(pretrained_model_name_or_path="openai/whisper-large-v3")
-            processor.save_pretrained("src/tokenizer_path")
-            model = AutoModelForSpeechSeq2Seq.from_pretrained(pretrained_model_name_or_path="openai/whisper-large-v3",
-                                                              torch_dtype=torch_dtype,
-                                                              use_safetensors=True, trust_remote_code=True)
-            model.save_pretrained("src/whisper_model_path")
+        # if os.path.exists("src/tokenizer_path") and os.path.exists("src/whisper_model_path"):
+        #     processor = AutoProcessor.from_pretrained(pretrained_model_name_or_path="src/tokenizer_path")
+        #     model = AutoModelForSpeechSeq2Seq.from_pretrained(
+        #         pretrained_model_name_or_path="src/whisper_model_path",
+        #         torch_dtype=torch_dtype,
+        #         use_safetensors=True)
+        # else:
+        processor = AutoProcessor.from_pretrained(pretrained_model_name_or_path="openai/whisper-large-v3")
+        # processor.save_pretrained("src/tokenizer_path")
+        model = AutoModelForSpeechSeq2Seq.from_pretrained(pretrained_model_name_or_path="openai/whisper-large-v3",
+                                                          torch_dtype=torch_dtype,
+                                                          use_safetensors=True, trust_remote_code=True)
+        # model.save_pretrained("src/whisper_model_path")
         # model.generation_config.cache_implementation = "static"
         # model.generation_config.max_new_tokens = 256
         # model.forward = torch.compile(model.forward, mode="reduce-overhead", fullgraph=True)
