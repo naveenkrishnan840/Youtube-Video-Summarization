@@ -1,5 +1,5 @@
 llama-index
-llama-index-vector-stores-lanced
+llama-index-vector-stores-lancedb
 llama-index-embeddings-clip
 fastapi
 uvicorn
