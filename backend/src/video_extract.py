@@ -26,7 +26,7 @@ def download_video(request, url: str):
             'outtmpl': '%(title)s.%(ext)s',  # Save the video with the title as filename
             'format': 'bestvideo+bestaudio/best',  # Download the best quality available
             "paths": {"home": os.getenv("VIDEO_PATH")},
-            "ffmpeg_location": "C:/Users/NavaneethanJeyapraka/ffmpeg/bin/ffmpeg.exe"
+            # "ffmpeg_location": "C:/Users/NavaneethanJeyapraka/ffmpeg/bin/ffmpeg.exe"
         }
 
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
