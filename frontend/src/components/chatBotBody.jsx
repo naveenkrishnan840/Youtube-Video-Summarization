@@ -106,7 +106,7 @@ export default function ChatBotBody () {
             }]
         )
         try {
-          const response = await fetch('http://127.0.0.1:8006/query', {
+          const response = await fetch('http://65.1.139.145:8084/query', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
