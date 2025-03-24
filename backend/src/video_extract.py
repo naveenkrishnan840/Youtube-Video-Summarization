@@ -110,7 +110,7 @@ async def audio_to_text():
         # with sdpa_kernel(SDPBackend.MATH):
         # os.environ["ffmpeg_location"] = "C:/Users/NavaneethanJeyapraka/ffmpeg/bin/ffmpeg"
         audio_text = pipe(os.path.join(os.getenv("AUDIO_PATH"), os.getenv("AUDIO_FORMAT")),
-                          generate_kwargs)
+                          **generate_kwargs)
         with open(os.path.join(os.getenv("DOCUMENTS_PATH"), os.getenv("OUTPUT_AUDIO_PATH")), "w+") as file:
             file.write(audio_text["text"])
         print("Text data saved to file")
