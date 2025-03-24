@@ -75,19 +75,19 @@ async def audio_to_text():
         device = "cuda:0" if torch.cuda.is_available() else "cpu"
         torch_dtype = torch.float16 if torch.cuda.is_available() else torch.float32
 
-        if os.path.exists("backend/src/tokenizer_path") and os.path.exists("backend/src/whisper_model_path"):
-            processor = AutoProcessor.from_pretrained(pretrained_model_name_or_path="backend/src/tokenizer_path")
+        if os.path.exists("src/tokenizer_path") and os.path.exists("src/whisper_model_path"):
+            processor = AutoProcessor.from_pretrained(pretrained_model_name_or_path="src/tokenizer_path")
             model = AutoModelForSpeechSeq2Seq.from_pretrained(
-                pretrained_model_name_or_path="backend/src/whisper_model_path",
+                pretrained_model_name_or_path="src/whisper_model_path",
                 torch_dtype=torch_dtype, low_cpu_mem_usage=True,
                 use_safetensors=True)
         else:
             processor = AutoProcessor.from_pretrained(pretrained_model_name_or_path="openai/whisper-large-v3")
-            processor.save_pretrained("backend/src/tokenizer_path")
+            processor.save_pretrained("src/tokenizer_path")
             model = AutoModelForSpeechSeq2Seq.from_pretrained(pretrained_model_name_or_path="openai/whisper-large-v3",
                                                               torch_dtype=torch_dtype,
                                                               use_safetensors=True, trust_remote_code=True)
-            model.save_pretrained("backend/src/whisper_model_path")
+            model.save_pretrained("src/whisper_model_path")
         # model.generation_config.cache_implementation = "static"
         # model.generation_config.max_new_tokens = 256
         # model.forward = torch.compile(model.forward, mode="reduce-overhead", fullgraph=True)
@@ -109,7 +109,7 @@ async def audio_to_text():
         }
         # with sdpa_kernel(SDPBackend.MATH):
         # os.environ["ffmpeg_location"] = "C:/Users/NavaneethanJeyapraka/ffmpeg/bin/ffmpeg"
-        audio_text = pipe(inputs=os.path.join(os.getenv("AUDIO_PATH"), os.getenv("AUDIO_FORMAT")),
+        audio_text = pipe(os.path.join(os.getenv("AUDIO_PATH"), os.getenv("AUDIO_FORMAT")),
                           generate_kwargs=generate_kwargs)
         with open(os.path.join(os.getenv("DOCUMENTS_PATH"), os.getenv("OUTPUT_AUDIO_PATH")), "w+") as file:
             file.write(audio_text["text"])
