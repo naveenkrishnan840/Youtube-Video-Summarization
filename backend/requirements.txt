@@ -4,7 +4,7 @@ llama-index-embeddings-clip
 fastapi
 uvicorn
 moviepy
-lanced
+lancedb
 yt-dlp
 transformers
 torch
