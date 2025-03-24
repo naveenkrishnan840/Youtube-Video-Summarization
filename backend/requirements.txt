@@ -1,10 +1,10 @@
 llama-index
-llama-index-vector-stores-lanced
+llama-index-vector-stores-lancedb
 llama-index-embeddings-clip
 fastapi
 uvicorn
 moviepy
-lanced
+lancedb
 yt-dlp
 transformers
 torch
@@ -14,3 +14,4 @@ soundfile
 llama-index-llms-huggingface
 llama-index-llms-gemini
 llama-index-embeddings-gemini
+llama-index-multi-modal-llms-gemini

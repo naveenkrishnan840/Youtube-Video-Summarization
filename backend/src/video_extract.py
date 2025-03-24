@@ -23,10 +23,11 @@ def download_video(request, url: str):
             shutil.rmtree(os.path.join(os.getenv("VIDEO_PATH")))
         os.makedirs(os.getenv("VIDEO_PATH"), exist_ok=True)
         ydl_opts = {
+            "cookies_from_browser": ("chrome", "firefox", "edge"),
             'outtmpl': '%(title)s.%(ext)s',  # Save the video with the title as filename
             'format': 'bestvideo+bestaudio/best',  # Download the best quality available
             "paths": {"home": os.getenv("VIDEO_PATH")},
-            "ffmpeg_location": "C:/Users/NavaneethanJeyapraka/ffmpeg/bin/ffmpeg.exe"
+            # "ffmpeg_location": "C:/Users/NavaneethanJeyapraka/ffmpeg/bin/ffmpeg.exe"
         }
 
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
