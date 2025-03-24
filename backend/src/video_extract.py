@@ -79,7 +79,7 @@ async def audio_to_text():
             processor = AutoProcessor.from_pretrained(pretrained_model_name_or_path="src/tokenizer_path")
             model = AutoModelForSpeechSeq2Seq.from_pretrained(
                 pretrained_model_name_or_path="src/whisper_model_path",
-                torch_dtype=torch_dtype, low_cpu_mem_usage=True,
+                torch_dtype=torch_dtype,
                 use_safetensors=True)
         else:
             processor = AutoProcessor.from_pretrained(pretrained_model_name_or_path="openai/whisper-large-v3")
