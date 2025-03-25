@@ -16,7 +16,7 @@ import AddIcon from '@mui/icons-material/Add';
 import Backdrop from '@mui/material/Backdrop';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
+import Snackbar from "@mui/material/Snackbar";
 
 const formValidationSchema = yup.object().shape({
     inputmessage: yup.string().required("Messgaes is Required"),
@@ -44,6 +44,7 @@ export default function ChatBotBody () {
     const [isLoading, setIsLoading] = useState(false);
     const heightRef = useRef(null);
     const [open, setOpen] = useState(false);
+    const [alertOpen, setAlertOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
@@ -106,7 +107,7 @@ export default function ChatBotBody () {
             }]
         )
         try {
-          const response = await fetch('http://65.1.139.145:8084/query', {
+          const response = await fetch('http://127.0.0.1:8006/query', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -147,7 +148,17 @@ export default function ChatBotBody () {
       };
     return (
         <>
-            {isError && <Alert onClose={()=>{setIsError(false)}} severity="error">Youtube Url is not valid. Can you check the url</Alert>}
+            <Snackbar className="w-full" anchorOrigin={{ vertical: "top", horizontal: "center" }} open={alertOpen} autoHideDuration={3000} onClose={() => setAlertOpen(false)}>
+                <Alert onClose={() => setAlertOpen(false)} severity="success">
+                    YouTube Video upload successfully. You can able to do chat with Bot 
+                </Alert>
+            </Snackbar>
+            <Snackbar className="w-full" anchorOrigin={{ vertical: "top", horizontal: "center" }} open={isError} autoHideDuration={3000} onClose={() => setIsError(false)}>
+                <Alert onClose={() => setIsError(false)} severity="error">
+                Youtube Url is not valid. Can you check the url 
+                </Alert>
+            </Snackbar>
+            {/* {isError && <Alert onClose={()=>{setIsError(false)}} severity="error"></Alert>} */}
             <div className="h-auto w-auto">
                 {videoProcessed && <div className="w-auto h-14 my-1 shadow-md rounded-md p-2 text-wrap text-center font-mono font-extrabold size-4 text-lg text-white">
                     YouTube Video Summarization
@@ -187,30 +198,30 @@ export default function ChatBotBody () {
                                         {({ field }) => (
                                             <>
                                                 <div className="flex flex-row">
-                                                    <Input disabled={isDisabled} onChange={(e)=> setUrl(e.target.value)} required placeholder="Enter the YouTube Url..." sx={{paddingLeft: "10px", width: "900px"}} value={url} className="focus:outline-none block h-15 resize-none rounded-md border-0 px-0 py-2 bg-slate-200" autoFocus=""></Input>
+                                                    <Input disabled={isDisabled || isLoading} onChange={(e)=> setUrl(e.target.value)} required placeholder="Enter the YouTube Url..." sx={{paddingLeft: "10px", width: "900px"}} value={url} className="focus:outline-none block h-15 resize-none rounded-md border-0 px-0 py-2 bg-slate-200" autoFocus=""></Input>
                                                     {!isLoading ? 
-                                                        <Tooltip title="Upload the url">
-                                                            <IconButton disabled={isDisabled} sx={{color:"red", height: "32px", width: "35px"}} className="relative border-1 bg-white rounded-lg float-right right-9 top-2 cursor-pointer">
-                                                                <UploadOutlinedIcon onClick={submitVideoId}/> 
-                                                            </IconButton>
-                                                        </Tooltip>
+                                                        <>
+                                                            <Tooltip title="Upload the url">
+                                                                <IconButton disabled={isDisabled} sx={{color:"red", height: "32px", width: "35px"}} className="relative border-1 bg-white rounded-lg float-right right-9 top-2 cursor-pointer">
+                                                                    <UploadOutlinedIcon onClick={submitVideoId}/> 
+                                                                </IconButton>
+                                                            </Tooltip>
+                                                            {videoProcessed && <Tooltip title="Add url">
+                                                                <IconButton sx={{color:"black", height: "32px", width: "35px"}} className="relative right-8 top-2 border-2 bg-white rounded-lg size-4 cursor-pointer">
+                                                                    <AddIcon onClick={uploadVideo}/> 
+                                                                </IconButton>
+                                                            </Tooltip>}
+                                                        </>
                                                     : 
-                                                    <Button className="relative bottom-10 left-3 float-right" 
+                                                    <Button className="relative right-16" 
                                                         size="medium"
                                                         startIcon={
                                                             isLoading ? (
                                                               <CircularProgress size={25} sx={{ color: 'red' }} />  // Change color here
                                                             ) : null
                                                           }
-                                                    />
-                                                    }
-                                                    <Tooltip title="Add url">
-                                                        <IconButton sx={{color:"black", height: "32px", width: "35px"}} className="relative right-8 top-2 border-2 bg-white rounded-lg size-4 cursor-pointer">
-                                                            <AddIcon onClick={uploadVideo}/> 
-                                                        </IconButton>
-                                                    </Tooltip>
+                                                    />}
                                                 </div>
-                                                
                                             </>
                                         )}
                                         </Field>
@@ -223,7 +234,7 @@ export default function ChatBotBody () {
                                                         <div className="flex min-h-[44px] items-center px-2" style={{color: "white"}}>
                                                             <div className="max-w-full flex-1">
                                                                 <div className="overflow-auto">
-                                                                    <TextareaAutosize required onChange={submitForm} {...field} style={{color: "black", maxHeight: "70px"}} className="focus:outline-none block h-10 w-full resize-none border-0 bg-transparent px-0 py-2" autoFocus="" placeholder="Chat here...">
+                                                                    <TextareaAutosize disabled={isLoading} required onChange={submitForm} {...field} style={{color: "black", maxHeight: "70px"}} className="focus:outline-none block h-10 w-full resize-none border-0 bg-transparent px-0 py-2" autoFocus="" placeholder="Chat here...">
                                                                     </TextareaAutosize>
                                                             </div>
                                                         </div>
