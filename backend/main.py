@@ -6,9 +6,7 @@ from fastapi.responses import StreamingResponse
 from fastapi.requests import Request
 import json
 from fastapi.middleware.cors import CORSMiddleware
-# from llama_index.multi_modal_llms.huggingface import HuggingFaceMultiModal
 from dotenv import load_dotenv
-# from llama_index.llms.gemini import Gemini
 from llama_index.embeddings.gemini import GeminiEmbedding
 from llama_index.embeddings.clip import ClipEmbedding
 from llama_index.core.prompts import ChatPromptTemplate
@@ -32,7 +30,7 @@ router = APIRouter()
 load_dotenv()
 # sys.path.append("C:/Users/NavaneethanJeyapraka/ffmpeg/bin/ffmpeg")
 
-# Settings.llm = Gemini(model_name="models/gemini-1.5-pro")
+Settings.llm = GeminiMultiModal(model_name="models/gemini-1.5-flash")
 Settings.embed_model = GeminiEmbedding(model_name="models/embedding-001")
 
 
@@ -80,8 +78,8 @@ async def model_response_streaming(request: Request, user_query:str):
     images, txt = retrieve(retriever_engine, query_str=user_query)
     images_documents = SimpleDirectoryReader(input_dir=os.getenv("DOCUMENTS_PATH"), input_files=images).load_data()
     content_str = "".join(txt)
-    # metadata_str = json.dumps(request.app.metadata)
-    metadata_str = "{'author': 'News TV', 'title': 'News TV', 'views': 200}"
+    metadata_str = json.dumps(request.app.metadata)
+    # metadata_str = "{'author': 'News TV', 'title': 'News TV', 'views': 200}"
 
     system_prompt = """
                 Given the provided information from the video, including relevant images, context, and metadata, 
@@ -111,7 +109,7 @@ async def model_response_streaming(request: Request, user_query:str):
             """
     human_prompt = human_prompt.format(context_str=content_str, metadata_str=metadata_str, query_str=user_query)
     prompt = (("system", system_prompt), ("user", human_prompt))
-    model = GeminiMultiModal(model_name="models/gemini-1.5-flash")
+    model = Settings.llm
     response = await model.astream(prompt=ChatPromptTemplate.from_messages(message_templates=prompt),
                                    image_documents=images_documents, chunk_size=250)
     # response = model.complete(prompt=human_prompt, image_documents=images_documents)
