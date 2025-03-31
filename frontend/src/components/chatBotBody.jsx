@@ -35,6 +35,7 @@ export default function ChatBotBody () {
         boxShadow: 24,
         p: 4,
       };
+    const [size, setSize] = useState(window.innerWidth);
     const [messages, setMessages] = useState([]);
     const [url, setUrl] = useState("");
     const [embedUrl, setembedUrl] = useState("");
@@ -53,11 +54,21 @@ export default function ChatBotBody () {
             heightRef.current.scrollTop = heightRef.current.scrollHeight;
         }
     };
+    useEffect(() => {
+        const resizeObserver = new ResizeObserver(() => {
+            setSize(window.innerWidth);
+        });
 
+        resizeObserver.observe(document.body);
+
+        return () => resizeObserver.disconnect();
+    }, []);
+    
       // Recalculate the height whenever messages change
     useEffect(() => {
         updateHeight();
     }, [messages]);
+    
     const submitVideoId = () => {
         setIsLoading(true)
         const response = RequestUrlService("/videoUrlProcessing", {"url": url});
@@ -86,12 +97,13 @@ export default function ChatBotBody () {
             setIsLoading(false)
         });
     }
+    
     const uploadVideo = () => {
         setVideoProcessed(false)
         setIsDisabled(false)
     }
+    
     const onSubmitForm = async (values) => {
-        
         const data = {"query": values["query"]};
         setMessages((prevMsg)=>
             [...prevMsg, {
@@ -107,7 +119,7 @@ export default function ChatBotBody () {
             }]
         )
         try {
-          const response = await fetch('http://127.0.0.1:8006/query', {
+          const response = await fetch('http://65.1.139.145:8084/query', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
