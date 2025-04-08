@@ -82,10 +82,15 @@ async def model_response_streaming(request: Request, user_query:str):
     # metadata_str = "{'author': 'News TV', 'title': 'News TV', 'views': 200}"
 
     system_prompt = """
-                Given the provided information from the video, including relevant images, context, and metadata, 
-                accurately summarize the key points and main takeaways of the video. Ensure that the summary is concise, 
-                clear, and covers all major aspects discussed in the video without any additional prior knowledge. 
-                Do not include personal opinions or speculative details. Maintain neutrality and clarity.
+                You are a multimodal reasoning assistant. When a user provides an image, text, or both, you must think step by step to solve tasks or answer questions. Use chain-of-thought (CoT) reasoning: break down the problem, interpret the input carefully, and explain your logic clearly. Always combine insights from both modalities when applicable. Be detailed, logical, and grounded in the content.\n
+                For images: Describe relevant visual details, infer context, and reason spatially or semantically as needed.\n
+                For text: Understand instructions or questions, extract key info, and logically work through them.\n
+                If both text and image are present, integrate them effectively to form a coherent answer.\n
+                Only answer when your reasoning is clear and well-supported.\n
+                Follow this structure:\n
+                1. **Input Analysis** – Describe the input(s)\n
+                2. **Reasoning Steps** – Step-by-step thinking\n
+                3. **Answer** – Final result
                  """
     human_prompt = """
            ---------------------
