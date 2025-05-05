@@ -79,7 +79,7 @@ The motivation behind this YouTube summarization project stems from the increasi
 ```mermaid
 graph TD
     %% Graph structure
-	A["YouTube Video (Input)"] --> B["yt-dlp (Video/Audio Extraction)"];
+	A["YouTube Video (Input)"] --> B["yt-dlp <br> (Video/Audio Extraction)"];
     	B --> C["Audio (MP3)"];
     	B --> D["Video (MP4)"];
     	C --> E["OpenAI Whisper (Speech-to-Text)"];
