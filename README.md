@@ -82,13 +82,13 @@ graph TD
 	A["YouTube Video (Input)"] --> B["yt-dlp <br> (Video/Audio Extraction)"];
     	B --> C["Audio (MP3)"];
     	B --> D["Video (MP4)"];
-    	C --> E["OpenAI Whisper (Speech-to-Text)"];
+    	C --> E["OpenAI Whisper <br> (Speech-to-Text)"];
     	D --> F["CLIP (Image Analysis)"];
     	E --> G["Text Data (Transcription)"];
     	F --> H["Key Frames (Images)"];
-    	H --> J["LanceDB (Image Vector + Text Vector)"];
+    	H --> J["LanceDB <br> (Image Vector + Text Vector)"];
 	G --> J;
-    	J --> K["Multimodal Model (Text + Images)"];
+    	J --> K["Multimodal Model <br> (Text + Images)"];
     	K --> L["Summarized Text & Images"];
 ```
 
