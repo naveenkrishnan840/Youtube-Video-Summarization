@@ -40,7 +40,7 @@ The motivation behind this YouTube summarization project stems from the increasi
        - Role: This tool is used to download YouTube videos. It can download both the video and audio tracks in various formats. This is the starting point of the project, where the system retrieves the raw video content from YouTube.
        - Output: You get the video in formats such as MP4 or audio in formats like MP3.
 
-  2. Extracting Audio and Transcribing Speech to Text using OpenAI Whisper:
+  2. Extracting Audio and Transcribing Speech to Text using HuggingFace OpenAI Whisper:
        - Package: ** OpenAI Whisper **
        - Role: Whisper is a speech-to-text model developed by OpenAI, capable of transcribing spoken language from audio to text. This step converts the audio from the 
                YouTube video into text form, making the speech content accessible for further processing.  
@@ -82,16 +82,16 @@ The motivation behind this YouTube summarization project stems from the increasi
 ```mermaid
 graph TD
     %% Graph structure
-	A["YouTube Video (Input)"] --> B["yt-dlp (Video/Audio Extraction)"];
+	A["YouTube Video (Input)"] --> B["yt-dlp <br> (Video/Audio Extraction)"];
     	B --> C["Audio (MP3)"];
     	B --> D["Video (MP4)"];
-    	C --> E["OpenAI Whisper (Speech-to-Text)"];
+    	C --> E["OpenAI Whisper <br> (Speech-to-Text)"];
     	D --> F["CLIP (Image Analysis)"];
     	E --> G["Text Data (Transcription)"];
     	F --> H["Key Frames (Images)"];
-    	H --> J["LanceDB (Image Vector + Text Vector)"];
+    	H --> J["LanceDB <br> (Image Vector + Text Vector)"];
 	G --> J;
-    	J --> K["Multimodal Model (Text + Images)"];
+    	J --> K["Multimodal Model <br> (Text + Images)"];
     	K --> L["Summarized Text & Images"];
 ```
 
